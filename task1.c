@@ -389,6 +389,10 @@ int main(void)
                 continue;
 
             file_lines = (char**)realloc(file_lines, lines_count * sizeof(char*));
+
+            for(int i = 0; i < lines_count; i++)
+                file_lines[i] = (char*)malloc(STR_LEN * sizeof(char));
+
             split(file_str, "\n", file_lines);
 
             is_file_open = 1;
@@ -424,7 +428,8 @@ int main(void)
                     // Moving array elements by one in front.
                     lines_count++;
                     file_lines = (char**)realloc(file_lines, lines_count * sizeof(char*));
-
+                    file_lines[lines_count - 1] = (char*)malloc(STR_LEN * sizeof(char));
+                
                     for(int i = lines_count - 2; i >= 0; i--)
                     {
                         char *temp_line = file_lines[i];
@@ -445,13 +450,6 @@ int main(void)
                     print_line();
                 } else if (edit_choose == 2)
                 {
-                    print_line();
-                    for (int i = 0; i < lines_count; i++)
-                    {
-                        printf("\n%d.%s", i+1, file_lines[i]); // !!!!!!!!!!
-                    }
-                    print_line();
-
                     char *string_to_add;
                     printf("\nInput string to add: ");
 
@@ -460,6 +458,7 @@ int main(void)
 
                     lines_count++;
                     file_lines = (char**)realloc(file_lines, lines_count * sizeof(char*));
+                    file_lines[lines_count - 1] = (char*)malloc(STR_LEN * sizeof(char));
                     file_lines[lines_count - 1] = string_to_add;
                 } else if (edit_choose == 3)
                 {
@@ -473,6 +472,7 @@ int main(void)
                     string_to_add[strlen(string_to_add) - 1] = '\0';
                     lines_count++;
                     file_lines = (char**)realloc(file_lines, lines_count * sizeof(char*));
+                    file_lines[lines_count - 1] = (char*)malloc(STR_LEN * sizeof(char));
 
                     for(int i = lines_count - 2; i >= line_after_to_insert; i--)
                     {
@@ -577,6 +577,10 @@ int main(void)
                 continue;
 
             char **file_lines_1 = (char**)malloc(lines_count_1 * sizeof(char*));
+
+            for(int i = 0; i < lines_count_1; i++)
+                file_lines_1[i] = (char*)malloc(STR_LEN * sizeof(char));
+                
             split(file_str_1, "\n", file_lines_1);
             printf("\nWatch on this file and decide which lines to choose.\n");
             view_file(lines_count_1, file_lines_1);
@@ -652,6 +656,10 @@ int main(void)
                 continue;
 
             char **file_lines_consonants = (char**)malloc(lines_count_consonants * sizeof(char*));
+
+            for(int i = 0; i < lines_count_consonants; i++)
+                file_lines_consonants[i] = (char*)malloc(STR_LEN * sizeof(char));
+
             split(file_str_consonants, "\n", file_lines_consonants);
 
             int array_consonants_count[lines_count_consonants];
